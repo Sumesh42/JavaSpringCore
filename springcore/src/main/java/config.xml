@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:context="http://www.springframework.org/schema/context"
+  xmlns:p="http://www.springframework.org/schema/p"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans
+  https://www.springframework.org/schema/beans/spring-beans.xsd
+  http://www.springframework.org/schema/context
+  https://www.springframework.org/schema/context/spring-context.xsd">
+  
+	<context:annotation-config></context:annotation-config>
+
+	<bean class="com.springcore.Student" name="student1">
+		<property name="studentId">
+			<value>1122</value>
+		</property>
+				<property name="studentName">
+			<value>Sumesh</value>
+		</property>
+				<property name="studentAddress">
+			<value>Bangalore</value>
+		</property>
+	</bean>
+	<!-- using p schema -->
+	<bean class="com.springcore.Student" name="student2" p:studentId="2233" p:studentName="Suresh" p:studentAddress="Bengaluru" />
+	
+		<bean class="com.springcore.collections.Employees" name="emp1">
+		<property name="name">
+			<value>Sumesh</value>
+		</property>
+		<property name="phones">
+			<list>
+				<value>12345</value>
+				<value>23456</value>
+				<value>34567</value>
+				<null/>
+			</list>
+		</property>
+		<property name="addresses">
+			<set>
+				<value>Bangalore</value>
+				<value>Bengaluru</value>
+			</set>
+		</property>
+		<property name="courses">
+			<map>
+			<entry key="java" value="2 months" />
+			<entry key="javascript" value="1 months" />
+			</map>
+		</property>
+	</bean>
+	
+	<!-- reference type -->
+	<bean class="com.springcore.ref.B" name="bref">
+		<property name="y" value="90"></property>
+	</bean>
+	<bean class="com.springcore.ref.A" name="aref">
+		<property name="x" value="50">
+		</property>
+		<property name="ob">
+			<ref bean="bref"/>
+		</property>
+	</bean>
+	
+	
+	<!-- constructor-args -->
+	
+	<bean class="com.springcore.constructorargs.Person" name="person">
+	<constructor-arg value="Sumesh"></constructor-arg>
+	<constructor-arg value="40" type="int"></constructor-arg>
+	<constructor-arg ref="certref"></constructor-arg>
+	<constructor-arg>
+		<list>
+			<value>Java</value>
+			<value>javascript</value>
+		</list>
+	</constructor-arg>
+	
+	</bean>
+		<bean class="com.springcore.constructorargs.Certificate" name="certref">
+		<constructor-arg value="Spring core certificate"></constructor-arg>
+	</bean>
+	
+	<!--  constructor ambiguity change type to int, double etc -->
+	<bean class="com.springcore.constructorargs.Constructorambiguity" name="addition">
+		<constructor-arg><value type="double">10</value></constructor-arg>
+		<constructor-arg><value type="double">20</value></constructor-arg>
+	</bean>
+	
+	<!-- spring life cycle start -->
+	<bean class="com.springcore.lifecycle.Vehicle" name="vehicle1" init-method="init" destroy-method="destroy">
+		<property name="name">
+			<value>TATA</value>
+		</property>
+	</bean>
+	<bean class="com.springcore.lifecycle.Polygon" name="polygon1">
+		<property name="name">
+		<value>Square</value>
+		</property>
+	</bean>
+	
+	<bean class="com.springcore.lifecycle.Movie" name="movie">
+		<property name="name">
+			<value>Conjuring</value>
+		</property>
+		<property name="genre"><value>Horror</value></property>
+	</bean>
+	<!-- spring life cycle end -->
+	
+	<!-- autowiring start -->
+	<bean class="com.springcore.autowire.Address" name="address">
+		<property name="city">
+			<value>Bengaluru</value>
+		</property>
+		<property name="street">
+			<value>Sahaka Nagar</value>
+		</property>
+	</bean>
+	<bean class="com.springcore.autowire.Employee" name="emp2" autowire="byName"></bean>
+	
+		<bean class="com.springcore.autowire.annotation.Address" name="newAddress">
+		<property name="city">
+			<value>Bangalore</value>
+		</property>
+		<property name="street">
+			<value>kodigehalli</value>
+		</property>
+	</bean>
+	<bean class="com.springcore.autowire.annotation.Employee" name="emp3"></bean>	<!-- autowire by annotation -->
+	<!-- autowiring end -->
+</beans>
+
+
+
+
+
+
+
+
+
+
+
+
+
